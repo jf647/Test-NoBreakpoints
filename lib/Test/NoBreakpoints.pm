@@ -38,13 +38,14 @@ package Test::NoBreakpoints;
 
 use strict;
 
+use File::Spec;
 use File::Find;
 use Test::Builder;
 
 require Exporter;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
-$VERSION   = '0.10';
+$VERSION   = '0.11';
 @ISA       = 'Exporter';
 @EXPORT    = qw|all_files_no_brkpts_ok no_brkpts_ok|;
 @EXPORT_OK = qw|all_perl_files|;
@@ -71,7 +72,7 @@ my $brkpt_rx = qr/
 sub no_brkpts_ok($;$)
 {
     
-       my($file, $name) = @_;
+    my($file, $name) = @_;
     $name ||= "no breakpoint test of $file";
     
     # slurp in the file
@@ -104,31 +105,52 @@ sub no_brkpts_ok($;$)
 sub all_perl_files
 {
 
-    my @dirs = @_;
-    unless( @dirs ) { @dirs = qw|blib t| }
+    my @queue = @_ ? @_ : _starting_points();
+    my @files = ();
 
-    my @files;
+    while ( @queue ) {
+        my $file = shift @queue;
+        if ( -d $file ) {
+            local *DH;
+            opendir DH, $file or next;
+            my @newfiles = readdir DH;
+            closedir DH;
 
-    for my $dir( @dirs ) {
-        find(
-            sub {
-                return unless -f $_;
-                my $hit = 0;
-                $hit = 1 if /\.(?:pl|pm|t)$/;
-                unless ( $hit ) {
-                    local *FH;
-                    open FH, $_ or die "Can't check $_";
-                    my $first = <FH>;
-                    close FH;
-                    $hit = 1 if $first && ($first =~ /^#!.*perl/);
-                }
-                push( @files, $File::Find::name ) if $hit;
-            }, $dir );
-    }
+            @newfiles = File::Spec->no_upwards( @newfiles );
+            @newfiles = grep { $_ ne "CVS" && $_ ne ".svn" } @newfiles;
+
+            push @queue, map "$file/$_", @newfiles;
+        }
+        if ( -f $file ) {
+            push @files, $file if _is_perl( $file );
+        }
+    } # while
 
     return @files;
 
 }
+
+sub _starting_points {
+    return 'blib' if -e 'blib';
+    return 'lib';
+}
+
+sub _is_perl {
+    my $file = shift;
+
+    return 1 if $file =~ /\.PL$/;
+    return 1 if $file =~ /\.p(l|m)$/;
+    return 1 if $file =~ /\.t$/;
+
+    local *FH;
+    open FH, $file or return;
+    my $first = <FH>;
+    close FH;
+
+    return 1 if defined $first && ($first =~ /^#!.*perl/);
+
+    return;
+}        
 
 # run no_brkpts_ok on all files in a given directory
 sub all_files_no_brkpts_ok

@@ -7,3 +7,8 @@
 CVS
 \.tar\.gz$
 acl\.pl
+\.releaserc
+.svn/.*$
+^cover_db
+afiedt.buf
+^foo.pl$

@@ -1,20 +1,23 @@
-2004-01-28 14:15  james
+#
+# $Id$
+#
 
-	* ChangeLog (1.2), META.yml (1.2), lib/Test/NoBreakpoints.pm (1.2),
-	t/01_use.t (1.2):
+2004-01-28  v0.10
+            - Initial release to CPAN
 
-	Fix $VERSION to be interpreted as a string
+2004-12-27  v0.11
+            - Fix $VERSION to be interpreted as a string.
+            - make t/baz/foo.t a usable do-nothing test script - it seems
+              that some versions of EU::MM recurse into the t directory,
+              trying to find all.t files.  Should fix the problem in
+              cpantesters failure report #170736.
+            - re-steal^H^H^H^H^Hborrow all_pod_files() from a newer version
+              of Test::Pod in an attempt to make it more robust and fix the
+              problem reported in cpantesters failure reports #170633 and
+              #120973.
+            - Switch from Test::Builder::Tester to Test::Tester, which has
+              a less arcane syntax and isn't as bothered about newline
+              differences.
 
-2004-01-28 14:11  james
-
-	* Build.PL (1.1), ChangeLog (1.1), MANIFEST (1.1), MANIFEST.SKIP
-	(1.1), META.yml (1.1), Makefile.PL (1.1), README (1.1),
-	lib/Test/NoBreakpoints.pm (1.1), t/01_use.t (1.1), t/02_pod.t
-	(1.1), t/04_all_perl_files.t (1.1), t/05_no_brkpts_ok.t (1.1),
-	t/06_all_files_no_brkpts_ok.t (1.1), t/bar1 (1.1), t/bar2 (1.1),
-	t/bar3 (1.1), t/bar4 (1.1), t/bar5 (1.1), t/bar6 (1.1), t/foo
-	(1.1), t/baz/foo.t (1.1), t/baz/gzonk/foo.pl (1.1),
-	t/baz/quux/Foo.pm (1.1):
-
-	Release v0.10 to CPAN
-
+#
+# EOF
