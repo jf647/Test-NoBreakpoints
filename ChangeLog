@@ -1,3 +1,10 @@
+2004-01-28 14:15  james
+
+	* ChangeLog (1.2), META.yml (1.2), lib/Test/NoBreakpoints.pm (1.2),
+	t/01_use.t (1.2):
+
+	Fix $VERSION to be interpreted as a string
+
 2004-01-28 14:11  james
 
 	* Build.PL (1.1), ChangeLog (1.1), MANIFEST (1.1), MANIFEST.SKIP
