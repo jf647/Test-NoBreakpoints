@@ -1,5 +1,5 @@
 #
-# $Id: NoBreakpoints.pm,v 1.1 2004/01/28 20:11:21 james Exp $
+# $Id$
 #
 
 =head1 NAME
