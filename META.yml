@@ -1,0 +1,20 @@
+--- #YAML:1.0
+name: Test-NoBreakpoints
+version: 0.10
+author:
+  - James FitzGibbon E<lt>jfitz@CPAN.orgE<gt>
+abstract: test that files do not contain soft breakpoints
+license: perl
+requires:
+  Test::Builder: 0
+  Test::Builder::Tester: 0
+recommends: {}
+build_requires:
+  Test::Exception: 0
+  Test::More: 0
+conflicts: {}
+provides:
+  Test::NoBreakpoints:
+    file: lib/Test/NoBreakpoints.pm
+    version: 0.10
+generated_by: Module::Build version 0.22

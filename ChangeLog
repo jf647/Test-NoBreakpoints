@@ -1,0 +1,13 @@
+2004-01-28 14:11  james
+
+	* Build.PL (1.1), ChangeLog (1.1), MANIFEST (1.1), MANIFEST.SKIP
+	(1.1), META.yml (1.1), Makefile.PL (1.1), README (1.1),
+	lib/Test/NoBreakpoints.pm (1.1), t/01_use.t (1.1), t/02_pod.t
+	(1.1), t/04_all_perl_files.t (1.1), t/05_no_brkpts_ok.t (1.1),
+	t/06_all_files_no_brkpts_ok.t (1.1), t/bar1 (1.1), t/bar2 (1.1),
+	t/bar3 (1.1), t/bar4 (1.1), t/bar5 (1.1), t/bar6 (1.1), t/foo
+	(1.1), t/baz/foo.t (1.1), t/baz/gzonk/foo.pl (1.1),
+	t/baz/quux/Foo.pm (1.1):
+
+	Release v0.10 to CPAN
+
