@@ -4,7 +4,11 @@
 
 BEGIN {
     use Test::Tester 0.09;
-    use Test::More tests => 23;
+    use Test::More;
+    our $tests = 27;
+    eval "use Test::NoWarnings";
+    $tests++ unless( $@ );
+    plan tests => $tests;
     chdir 't' if -d 't';
     use lib '../lib', '../blib/lib';
 }
@@ -13,7 +17,7 @@ use Test::NoBreakpoints ':all';
 
 # test the tester for failure
 check_tests(
-    sub { all_files_no_brkpts_ok( sort(all_perl_files('.')) ) },
+    sub { all_files_no_breakpoints_ok( sort(all_perl_files('.')) ) },
     [
         {
             ok   => 1,
@@ -29,13 +33,21 @@ check_tests(
         },
         {
             ok   => 0,
-            name => 'no breakpoint test of ./05_no_brkpts_ok.t',
-            diag => 'breakpoint found in ./05_no_brkpts_ok.t: $DB::signal =1' . "\n",
+            name => 'no breakpoint test of ./05_no_breakpoints_ok.t',
+            diag => 'breakpoint found in ./05_no_breakpoints_ok.t: $DB::signal =1' . "\n",
         },
         {
             ok   => 0,
-            name => 'no breakpoint test of ./06_all_files_no_brkpts_ok.t',
-            diag => 'breakpoint found in ./06_all_files_no_brkpts_ok.t: $DB::signal =1' . "\n",
+            name => 'no breakpoint test of ./06_all_files_no_breakpoints_ok.t',
+            diag => 'breakpoint found in ./06_all_files_no_breakpoints_ok.t: $DB::signal =1' . "\n",
+        },
+        {
+            ok   => 1,
+            name => 'no breakpoint test of ./07_deprecated_warnings.t',
+        },
+        {
+            ok   => 1,
+            name => 'no breakpoint test of ./08_deprecated.t',
         },
         {
             ok   => 0,
@@ -52,7 +64,7 @@ check_tests(
             name => 'no breakpoint test of ./baz/quux/Foo.pm',
         },
     ],
-    'all_files_no_brkpts_ok finds correct breakpoints',
+    'all_files_no_breakpoints_ok finds correct breakpoints',
 );
 
 #

@@ -8,8 +8,10 @@ README
 t/01_use.t
 t/02_pod.t
 t/04_all_perl_files.t
-t/05_no_brkpts_ok.t
-t/06_all_files_no_brkpts_ok.t
+t/05_no_breakpoints_ok.t
+t/06_all_files_no_breakpoints_ok.t
+t/07_deprecated_warnings.t
+t/08_deprecated.t
 t/bar1
 t/bar2
 t/bar3

@@ -10,7 +10,7 @@ Test::NoBreakpoints - test that files do not contain soft breakpoints
 
  use Test::NoBreakpoints;
  plan tests => $num_tests;
- no_brkpts_ok( $file, 'Contains no soft breakpoints' );
+ no_breakpoints_ok( $file, 'Contains no soft breakpoints' );
 
 Module authors can include the following in a t/nobreakpoints.t file to add
 such checking to a module distribution:
@@ -18,7 +18,7 @@ such checking to a module distribution:
   use Test::More;
   eval "use Test::NoBreakpoints 0.10";
   plan skip_all => "Test::NoBreakpoints 0.10 required for testing" if $@;
-  all_files_no_brkpts_ok();
+  all_files_no_breakpoints_ok();
 
 =head1 DESCRIPTION
 
@@ -45,9 +45,14 @@ use Test::Builder;
 require Exporter;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
-$VERSION   = '0.12';
+$VERSION   = '0.13';
 @ISA       = 'Exporter';
-@EXPORT    = qw|all_files_no_brkpts_ok no_brkpts_ok|;
+@EXPORT    = qw|
+    all_files_no_breakpoints_ok
+    all_files_no_brkpts_ok
+    no_breakpoints_ok
+    no_brkpts_ok
+|;
 @EXPORT_OK = qw|all_perl_files|;
 %EXPORT_TAGS = (
     all => [ @EXPORT, @EXPORT_OK ],
@@ -69,7 +74,7 @@ my $brkpt_rx = qr/
 /x;
 
 # check that there are no breakpoints in a file
-sub no_brkpts_ok($;$)
+sub no_breakpoints_ok($;$)
 {
     
     my($file, $name) = @_;
@@ -97,6 +102,15 @@ sub no_brkpts_ok($;$)
     
     return $matched ? 0 : 1;
     
+}
+
+# deprecated name for the above
+sub no_brkpts_ok
+{
+
+    warnings::warnif('deprecated', "no_brkpts_ok is deprecated (use no_breakpoints_ok instead)");
+    goto &no_breakpoints_ok;
+
 }
 
 # find all perl files in a given directory
@@ -130,6 +144,7 @@ sub all_perl_files
 
 }
 
+
 sub _starting_points {
     return 'blib' if -e 'blib';
     return 'lib';
@@ -152,18 +167,27 @@ sub _is_perl {
     return;
 }        
 
-# run no_brkpts_ok on all files in a given directory
-sub all_files_no_brkpts_ok
+# run no_breakpoints_ok on all files in a given directory
+sub all_files_no_breakpoints_ok
 {
 
     my @files = @_ ? @_ : all_perl_files();
 
     my $ok = 1; # presume all succeed
     for( @files ) {
-        no_brkpts_ok($_) or $ok = 0;
+        no_breakpoints_ok($_) or $ok = 0;
     }
     return $ok;
     
+}
+
+# deprecated name for the above
+sub all_files_no_brkpts_ok
+{
+
+    warnings::warnif('deprecated', "all_files_no_brkpts_ok is deprecated (use all_files_no_breakpoints_ok instead)");
+    goto &all_files_no_breakpoints_ok;
+
 }
 
 # keep require happy
@@ -178,13 +202,16 @@ Unless otherwise noted, all functions are tests built on top of
 Test::Builder, so the standard admonition about having made a plan before
 you run them apply.
 
-=head2 no_brkpts_ok($file, [$description] )
+=head2 no_breakpoints_ok($file, [$description] )
 
 Checks that $file contains no breakpoints.  If the optional $description is
 not passed it defaults to "no breakpoint test of $file".
 
 If the test fails, the line number of the file where the breakpoint was
 found will be emitted.
+
+For compatibility with old versions of this module, the deprecated name
+C<no_brkpts_ok> may also be used (but see L</"DEPRECATED FUNCTIONS">).
 
 =head2 all_perl_files( [@dirs] )
 
@@ -194,18 +221,43 @@ listed.  If C<@dirs> is not passed, defaults to C<blib> and C<t>.
 The order of the files returned is machine-dependent.  If you want them
 sorted, you'll have to sort them yourself.
 
-=head2 all_files_no_brkpts_ok( [@files] )
+=head2 all_files_no_breakpoints_ok( [@files] )
 
-Checks all files that look like they contain Perl using no_brkpts_ok(). If
+Checks all files that look like they contain Perl using no_breakpoints_ok(). If
 C<@files> is not provided, it defaults to the return of B<all_perl_files()>.
+
+For compatibility with old versions of this module, the deprecated name
+C<all_files_no_brkpts_ok> may also be used (but see L</"DEPRECATED
+FUNCTIONS">).
 
 =head1 EXPORTS
 
-By default B<all_files_no_brkpts_ok> and B<no_brkpts_ok>.
+By default B<all_files_no_breakpoints_ok> and B<no_breakpoints_ok>.
+
+For the time being, the deprecated forms the above
+(B<all_files_no_brkpts_ok> and B<no_brkpts_ok>) are also exported (but see
+L</"DEPRECATED FUNCTIONS">).
 
 On request, B<all_perl_files>.
 
 Everything with the tag B<:all>.
+
+=head1 DEPRECATED FUNCTIONS
+
+Prior to v0.13 of this module, no_breakpoints_ok was called no_brkpts_ok and
+all_files_no_breakpoints_ok was similarly abbreviated.
+
+In v0.13, these older names were deprecated.  They are still exported by
+default, but will emit a warning unless you disable the B<deprecated>
+lexical warning category:
+
+  {
+    no warnings 'deprecated';
+    no_brkpts_ok(...);
+  }
+  
+In the next release, the deprecated functions will have to be pulled in via
+an import tag.  In the release after that, they will cease to be.
 
 =head1 ACKNOWLEDGEMENTS
 

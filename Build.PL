@@ -24,6 +24,7 @@ Module::Build->new(
         Test::More            => 0,
         Test::Exception       => 0,
         Test::Tester          => 0.09,
+        Test::Warn            => 0,
     },
 
     add_to_cleanup      => [ qw|
