@@ -23,7 +23,7 @@
             - require v0.09 of Test::Tester.  Should fix the blow-up
               reported in cpantesters report #176356.
 
-            v0.13
+2005-01-13  v0.13
             - change 'brkpts' to 'breakpoints' on the advice of Andy Lester
               The old names still exist, but will emit warnings unless
               supressed using the warnings pragma.  The old names will
