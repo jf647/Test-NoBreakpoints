@@ -320,11 +320,11 @@ L<Test::Pod>
 
 =head1 AUTHOR
 
-James FitzGibbon E<lt>jfitz@CPAN.orgE<gt>
+James FitzGibbon <jfitz@CPAN.org>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2004, James FitzGibbon.  All Rights Reserved.
+Copyright (c) 2004-2005, James FitzGibbon.  All Rights Reserved.
 
 This module is free software. You may use it under the same terms as perl
 itself.
