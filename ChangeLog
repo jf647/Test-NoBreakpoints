@@ -19,5 +19,9 @@
               a less arcane syntax and isn't as bothered about newline
               differences.
 
+2004-12-30  v0.12
+            - require v0.09 of Test::Tester.  Should fix the blow-up
+              reported in cpantesters report #176356.
+
 #
 # EOF

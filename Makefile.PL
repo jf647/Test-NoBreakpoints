@@ -8,7 +8,7 @@ WriteMakefile
                            'Test::Builder' => '0',
                            'Test::Exception' => '0',
                            'Test::More' => '0',
-                           'Test::Tester' => '0'
+                           'Test::Tester' => '0.09'
                          },
           'INSTALLDIRS' => 'site',
           'PL_FILES' => {}

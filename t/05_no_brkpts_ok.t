@@ -3,7 +3,7 @@
 #
 
 BEGIN {
-    use Test::Tester;
+    use Test::Tester 0.09;
     use Test::More tests => 46;
     chdir 't' if -d 't';
     use lib '../lib', '../blib/lib';

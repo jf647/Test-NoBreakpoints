@@ -45,7 +45,7 @@ use Test::Builder;
 require Exporter;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
-$VERSION   = '0.11';
+$VERSION   = '0.12';
 @ISA       = 'Exporter';
 @EXPORT    = qw|all_files_no_brkpts_ok no_brkpts_ok|;
 @EXPORT_OK = qw|all_perl_files|;
