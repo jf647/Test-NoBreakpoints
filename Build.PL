@@ -1,5 +1,5 @@
 #
-# $Id$
+# $Id: Build.PL,v 1.1 2004/01/28 20:11:19 james Exp $
 #
 
 use Module::Build;
@@ -12,11 +12,11 @@ my $build = Module::Build->new(
     create_readme       => 1,
     requires            => {
         Test::Builder         => 0,
-        Test::Builder::Tester => 0,
     },
     build_requires      => {
         Test::More            => 0,
         Test::Exception       => 0,
+        Test::Builder::Tester => 0,
     },
 );
 
