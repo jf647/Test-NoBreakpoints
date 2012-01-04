@@ -1,7 +1,3 @@
-#
-# $Id$
-#
-
 BEGIN {
     use Test::Tester 0.09;
     use Test::More;
@@ -55,7 +51,3 @@ for my $file( qw|bar1 bar2 bar3 bar4 bar5 bar6| ) {
         'no_breakpoints_ok finds simple breakpoint',
     );
 }
-
-#
-# EOF
-

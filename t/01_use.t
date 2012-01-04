@@ -1,7 +1,3 @@
-#
-# $Id$
-#
-
 use strict;
 use warnings;
 
@@ -15,7 +11,7 @@ my %expected;
 BEGIN {
 
     %expected = (
-        'Test::NoBreakpoints' => '0.13',
+        'Test::NoBreakpoints' => '0.14',
     );
 
     use Test::More;
@@ -43,6 +39,3 @@ for my $package( keys %expected ) {
     is($version_var, $expected{$package},
         "$package is at version $expected{$package}");
 }
-
-#
-# EOF
