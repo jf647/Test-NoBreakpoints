@@ -11,7 +11,7 @@ no warnings 'deprecated';
 BEGIN {
     use Test::Tester 0.09;
     use Test::More;
-    our $tests = 17;
+    our $tests = 21;
     eval "use Test::NoWarnings";
     $tests++ unless( $@ );
     plan tests => $tests;
@@ -39,14 +39,17 @@ check_tests(
     [
         {
             ok   => 1,
+            depth => 2,
             name => 'no breakpoint test of ./01_use.t',
         },
         {
             ok   => 1,
+            depth => 2,
             name => 'no breakpoint test of ./02_pod.t',
         },
         {
             ok   => 1,
+            depth => 2,
             name => 'no breakpoint test of ./04_all_perl_files.t',
         },
     ],

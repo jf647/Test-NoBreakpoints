@@ -30,5 +30,8 @@
               be removed after two releases or a reasonable period of time,
               whichever is longer.
 
+2012-01-03 v0.14
+	- apply patch from https://rt.cpan.org/Ticket/Display.html?id=53609
+
 #
 # EOF
