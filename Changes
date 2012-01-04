@@ -1,7 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
-	- apply patch from https://rt.cpan.org/Ticket/Display.html?id=53609
+    - apply patch from https://rt.cpan.org/Ticket/Display.html?id=53609
     - Remove deprecated methods
     - Convert to Dist::Zilla
     - Make tests pass under 'dzil smoke'
