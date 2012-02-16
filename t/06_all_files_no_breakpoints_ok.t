@@ -1,12 +1,9 @@
 BEGIN {
     use Test::Tester 0.09;
     use Test::More;
-    our $tests = 31;
+    our $tests = 46;
     eval "use Test::NoWarnings";
     $tests++ unless( $@ );
-    # TODO: make this not horrific
-    $tests += 15
-        if $ENV{AUTHOR_TESTING} || $ENV{AUTOMATED_TESTING};
     plan tests => $tests;
     chdir 't' if -d 't';
     use lib '../lib', '../blib/lib';
@@ -15,6 +12,11 @@ BEGIN {
 use Test::NoBreakpoints ':all';
 
 my $checklist = [
+    {
+        ok   => 1,
+        depth => 2,
+        name => 'no breakpoint test of ./00-load.t',
+    },
     {
         ok   => 1,
         depth => 2,
@@ -59,39 +61,27 @@ my $checklist = [
         depth => 2,
         name => 'no breakpoint test of ./baz/quux/Foo.pm',
     },
-];
-
-# we have more test files under 'dzil test' than prove
-if ($ENV{AUTHOR_TESTING} || $ENV{AUTOMATED_TESTING}) {
-    unshift @{$checklist}, {
+    {
         ok   => 1,
         depth => 2,
-        name => 'no breakpoint test of ./00-load.t',
-    };
-
-    push @{$checklist}, (
-        {
-            ok   => 1,
-            depth => 2,
-            name => 'no breakpoint test of ./release-kwalitee.t',
-        },
-        {
-            ok   => 1,
-            depth => 2,
-            name => 'no breakpoint test of ./release-no-tabs.t',
-        },
-        {
-            ok   => 1,
-            depth => 2,
-            name => 'no breakpoint test of ./release-pod-coverage.t',
-        },
-        {
-            ok   => 1,
-            depth => 2,
-            name => 'no breakpoint test of ./release-pod-syntax.t',
-        },
-    );
-}
+        name => 'no breakpoint test of ./release-kwalitee.t',
+    },
+    {
+        ok   => 1,
+        depth => 2,
+        name => 'no breakpoint test of ./release-no-tabs.t',
+    },
+    {
+        ok   => 1,
+        depth => 2,
+        name => 'no breakpoint test of ./release-pod-coverage.t',
+    },
+    {
+        ok   => 1,
+        depth => 2,
+        name => 'no breakpoint test of ./release-pod-syntax.t',
+    },
+];
 
 # test the tester for failure
 check_tests(

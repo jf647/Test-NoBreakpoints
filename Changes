@@ -1,6 +1,11 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+    - fix RT#75059
+    - Fix tests to not exclude author only tests when it isn't appropriate
+      to do so (e.g. file finds / counts)
+
+2012-01-04  v0.14
     - apply patch from https://rt.cpan.org/Ticket/Display.html?id=53609
     - Remove deprecated methods
     - Convert to Dist::Zilla

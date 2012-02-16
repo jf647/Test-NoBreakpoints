@@ -13,6 +13,7 @@ use Test::Exception;
 
 # test that all files in the test directory are found properly
 my @tests = qw|
+   ./00-load.t
    ./01_use.t
    ./02_pod.t
    ./04_all_perl_files.t
@@ -21,18 +22,11 @@ my @tests = qw|
    ./baz/foo.t
    ./baz/gzonk/foo.pl
    ./baz/quux/Foo.pm
+   ./release-no-tabs.t
+   ./release-kwalitee.t
+   ./release-pod-coverage.t
+   ./release-pod-syntax.t
 |;
-
-# if we're running dzil test we get more files than prove
-if ($ENV{AUTHOR_TESTING} || $ENV{AUTOMATED_TESTING}) {
-    push @tests, qw|
-        ./00-load.t
-        ./release-kwalitee.t
-        ./release-no-tabs.t
-        ./release-pod-coverage.t
-        ./release-pod-syntax.t
-    |;
-}
 
 my @expected = sort @tests;
 
